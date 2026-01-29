@@ -1,1 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>孕乃馨｜民办非营利组织</title>
+  <meta name="description" content="孕乃馨民办非营利组织：立足社区，开展孕产与哺乳知识普及、健康生活辅导、公益义诊、困难帮扶及社区公益活动与社交支持。" />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --muted:#a9b3c6;
+      --text:#e9eef8;
+      --brand:#8bd3dd;
+      --brand2:#c3f0ca;
+      --line:rgba(255,255,255,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", Arial, "Noto Sans CJK SC", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(139,211,221,.18), transparent 60%),
+        radial-gradient(1000px 700px at 80% 20%, rgba(195,240,202,.14), transparent 55%),
+        linear-gradient(180deg, #070c16 0%, var(--bg) 55%, #070c16 100%);
+      line-height:1.7;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .nav{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(7,12,22,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .navin{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:10px}
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:160px;
+      font-weight:700; letter-spacing:.5px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(139,211,221,.95), rgba(195,240,202,.95));
+      box-shadow: 0 10px 28px rgba(139,211,221,.18);
+    }
+    .menu{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .menu a{
+      padding:8px 10px;
+      border:1px solid transparent;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .menu a:hover{border-color:var(--line); color:var(--text)}
+    .hero{padding:56px 0 22px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr}
+    }
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroMain{padding:28px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size:14px;
+    }
+    .kdot{
+      width:8px;height:8px;border-radius:999px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 0 4px rgba(139,211,221,.12);
+    }
+    h1{margin:14px 0 8px; font-size:42px; line-height:1.15}
+    @media (max-width: 520px){h1{font-size:34px}}
+    .sub{color:var(--muted); font-size:16px; margin:0 0 18px}
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight:600;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btnPrimary{
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(139,211,221,.92), rgba(195,240,202,.92));
+      color:#07111f;
+    }
+    .note{font-size:13px; color:var(--muted); margin-top:10px}
+    .heroSide{padding:22px}
+    .stat{
+      display:grid; gap:10px;
+    }
+    .statItem{
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .statItem b{display:block; font-size:16px; margin-bottom:4px}
+    .statItem span{color:var(--muted); font-size:13px}
+    .section{padding:22px 0}
+    .section h2{
+      font-size:22px; margin:0 0 10px;
+    }
+    .section p{margin:0 0 12px; color:var(--muted)}
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){.grid3{grid-template-columns:1fr}}
+    .card{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .card h3{margin:0 0 8px; font-size:16px}
+    .card ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    .pillRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .pill{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-size:13px;
+    }
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){.split{grid-template-columns:1fr}}
+    .footer{
+      padding:26px 0 40px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footer a{color:var(--text); text-decoration:underline; text-decoration-color: rgba(255,255,255,.2)}
+    .small{font-size:13px; color:var(--muted)}
+    .divider{height:1px; background:var(--line); margin:14px 0}
+  </style>
+</head>
 
+<body>
+  <!-- 顶部导航 -->
+  <header class="nav">
+    <div class="wrap navin">
+      <a class="brand" href="#top" aria-label="孕乃馨-首页">
+        <span class="logo" aria-hidden="true"></span>
+        <span>孕乃馨</span>
+      </a>
+      <nav class="menu" aria-label="站点导航">
+        <a href="#about">关于我们</a>
+        <a href="#vision">愿景</a>
+        <a href="#scope">宗旨与业务范围</a>
+        <a href="#join">加入我们</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 首屏 -->
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="panel heroMain">
+          <div class="kicker"><span class="kdot"></span>民办非营利组织｜立足社区｜公益服务</div>
+          <h1>关爱孕产 · 温暖社区 · 共建健康未来</h1>
+          <p class="sub">
+            <b>孕乃馨</b>以孕产妇及婴幼儿家庭为核心服务对象，聚焦孕期、产后及哺乳阶段的身心健康需求，
+            通过知识普及、健康生活辅导、公益义诊、困难帮扶与社区活动，提供有温度、可持续的社会支持。
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn btnPrimary" href="#scope">查看宗旨与业务范围</a>
+            <a class="btn" href="#join">成为志愿者 / 合作伙伴</a>
+          </div>
+          <div class="note small">
+            提示：本网站内容用于公益科普与社区支持，不替代医疗诊断与治疗；如有紧急情况请及时就医或拨打当地急救电话。
+          </div>
+        </div>
+
+        <aside class="panel heroSide">
+          <div class="stat">
+            <div class="statItem">
+              <b>服务方向</b>
+              <span>孕产科普｜健康生活指导｜公益义诊｜困难帮扶｜社区互助与社交支持</span>
+            </div>
+            <div class="statItem">
+              <b>服务对象</b>
+              <span>孕产妇、哺乳期母亲、新手父母及婴幼儿家庭（含特殊困难家庭）</span>
+            </div>
+            <div class="statItem">
+              <b>我们的承诺</b>
+              <span>公益为本｜专业支持｜尊重隐私｜合规开展｜长期陪伴</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="section">
+      <h2>关于孕乃馨</h2>
+      <p>
+        孕乃馨是一家以公益性、非营利性为原则的民办非营利组织。我们相信：每一位母亲都值得被专业守护，
+        每一个新生命都应在关爱中成长。我们在社区中连接家庭、志愿者与专业力量，让科学知识更易获得，让支持更及时可达。
+      </p>
+      <div class="pillRow">
+        <span class="pill">公益为本</span>
+        <span class="pill">专业支持</span>
+        <span class="pill">社区共建</span>
+        <span class="pill">长期陪伴</span>
+        <span class="pill">尊重与隐私保护</span>
+      </div>
+    </section>
+
+    <!-- 愿景 -->
+    <section id="vision" class="section">
+      <div class="panel" style="padding:20px;">
+        <h2 style="margin-top:0">我们的愿景</h2>
+        <p style="margin-bottom:0">
+          打造一个<strong>有温度、有专业、有支持力</strong>的孕产妇社区公益平台，
+          让科学的孕产知识触手可及，让需要帮助的家庭不再孤立无援：
+        </p>
+        <div class="divider"></div>
+        <div class="pillRow" style="margin-top:0">
+          <span class="pill">让健康知识走进社区</span>
+          <span class="pill">让公益服务真正落地</span>
+          <span class="pill">让孕产妇获得尊重、支持与陪伴</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 宗旨与业务范围（官网版本） -->
+    <section id="scope" class="section">
+      <h2>宗旨与业务范围（官网版）</h2>
+
+      <div class="split">
+        <div class="card">
+          <h3>一、宗旨</h3>
+          <p>
+            孕乃馨民办非营利组织以关爱孕产妇及婴幼儿家庭身心健康为宗旨，坚持公益性、非营利性原则，
+            立足社区，面向家庭，围绕孕期、产后及哺乳阶段开展公益服务与社会支持工作。
+          </p>
+          <p>
+            本组织致力于通过科学知识普及、健康生活指导、公益服务与社区支持，提升孕产妇及家庭的健康意识与生活质量，
+            缓解孕产阶段面临的实际困难与心理压力，促进家庭和谐与社区互助，助力构建健康、包容、可持续的社区环境。
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>三、业务开展原则</h3>
+          <ul>
+            <li>坚持公益性、非营利性，不从事营利性活动；</li>
+            <li>遵守法律法规及行业规范，依法依规开展业务；</li>
+            <li>尊重隐私，保护服务对象合法权益；</li>
+            <li>注重专业性与社会责任并重。</li>
+          </ul>
+          <div class="divider"></div>
+          <p class="small" style="margin:0">
+            如需用于章程备案/登记材料，可在本版本基础上进一步压缩为“章程版”措辞。
+          </p>
+        </div>
+      </div>
+
+      <div style="height:14px"></div>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>（一）孕产与哺乳相关知识普及</h3>
+          <ul>
+            <li>开展孕期、产后及哺乳期相关的公益知识宣传与科普活动；</li>
+            <li>组织孕产妇健康讲座、公益课堂及科普活动；</li>
+            <li>制作并传播科学、规范的孕产与育儿知识资料；</li>
+            <li>通过线上与线下相结合的方式提升公众健康认知水平。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>（二）孕产妇健康生活方式辅导</h3>
+          <ul>
+            <li>提供孕期及产后健康生活方式的公益指导；</li>
+            <li>开展情绪调适、心理支持与家庭支持相关的公益活动；</li>
+            <li>引导科学作息、合理营养与健康行为习惯；</li>
+            <li>鼓励家庭成员参与孕产支持，提升家庭照护能力。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>（三）公益义诊与健康支持服务</h3>
+          <ul>
+            <li>联合具备资质的医疗与健康专业人士开展公益义诊活动；</li>
+            <li>提供基础健康咨询、健康评估及健康知识指导；</li>
+            <li>组织社区健康服务活动与公益健康日；</li>
+            <li>在合法合规前提下，为有需要的人群提供健康支持与转介服务。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>（四）困难孕产家庭帮扶</h3>
+          <ul>
+            <li>关注经济困难或特殊情况的孕产家庭；</li>
+            <li>通过公益项目提供必要的帮扶与支持；</li>
+            <li>协助对接医疗、心理及社会公益资源；</li>
+            <li
