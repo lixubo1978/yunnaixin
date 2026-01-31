@@ -9,7 +9,6 @@
   <style>
     :root{
       --bg:#fff7fa;
-      --card:#ffffff;
       --muted:#8f6f79;
       --text:#4b2432;
 
@@ -34,8 +33,6 @@
         "PingFang SC","Hiragino Sans GB","Microsoft YaHei",
         Arial,"Noto Sans CJK SC",sans-serif;
       color:var(--text);
-
-      /* ✅ 同目录：index.html、logo.jpeg、background-pink.jpeg */
       background-image: url("./background-pink.jpeg");
       background-repeat:no-repeat;
       background-position:center top;
@@ -43,8 +40,6 @@
       background-color:var(--bg);
       line-height:1.7;
     }
-
-    /* ✅ 轻薄粉色遮罩：让背景更“看得见”，但不晦涩 */
     body::before{
       content:"";
       position:fixed;
@@ -65,10 +60,7 @@
       font-size:13px;
       color:var(--muted);
     }
-    .topbarIn{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:8px 0;
-    }
+    .topbarIn{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 0;}
     .topbarLeft{display:flex; gap:14px; flex-wrap:wrap}
     .topbarRight{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
     .search{
@@ -85,24 +77,17 @@
     .miniLink{color:var(--muted)}
     .miniLink:hover{color:var(--text); text-decoration:underline}
 
-    /* Header（你要的刚才那种粉色玻璃感） */
+    /* Header */
     .nav{
       position:sticky; top:0; z-index:20;
       backdrop-filter:saturate(140%) blur(10px);
       background: var(--pinkbar);
       border-bottom:1px solid var(--line);
     }
-    .navin{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.5px;
-      min-width:200px;
-    }
+    .navin{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:12px;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px; min-width:200px;}
     .logo{
-      display:inline-block;          /* ✅ 必须有 */
+      display:inline-block;
       width:34px; height:34px;
       border-radius:8px;
       background-image:url("./logo.jpeg");
@@ -111,12 +96,7 @@
       background-size:contain;
     }
     .menu{display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end}
-    .menu a{
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:14px;
-      color:var(--muted);
-    }
+    .menu a{padding:8px 12px; border-radius:999px; font-size:14px; color:var(--muted);}
     .menu a:hover{background:var(--chip); color:var(--text)}
 
     /* 通用卡片 */
@@ -137,7 +117,7 @@
       border-radius:12px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.65);
-      font-weight:700;
+      font-weight:800;
       cursor:pointer;
     }
     .btn:hover{transform: translateY(-1px)}
@@ -147,7 +127,7 @@
       color:#3b1b26;
     }
 
-    /* 首屏：banner + 快捷入口 */
+    /* 首屏 */
     .hero{padding:18px 0 8px}
     .heroGrid{
       display:grid;
@@ -157,15 +137,8 @@
     }
     @media (max-width: 980px){ .heroGrid{grid-template-columns:1fr} }
 
-    .banner{
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .bannerTop{
-      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-      font-size:13px; color:var(--muted);
-    }
+    .banner{padding:18px; position:relative; overflow:hidden;}
+    .bannerTop{display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:13px; color:var(--muted);}
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding:6px 10px;
@@ -173,29 +146,15 @@
       border:1px solid var(--line);
       background: rgba(255,255,255,.55);
     }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-    }
-    .banner h1{
-      margin:10px 0 8px;
-      font-size:40px;
-      line-height:1.12;
-      letter-spacing:.5px;
-    }
+    .dot{width:8px; height:8px; border-radius:999px; background: linear-gradient(135deg, var(--brand), var(--brand2));}
+    .banner h1{margin:10px 0 8px; font-size:40px; line-height:1.12; letter-spacing:.5px;}
     @media (max-width:520px){ .banner h1{font-size:32px} }
     .banner p{margin:0; color:var(--muted)}
-    .bannerNote{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
-    }
+    .bannerNote{margin-top:10px; font-size:12px; color:var(--muted);}
 
     .sideBox{padding:16px}
     .sideBox h3{font-size:15px; margin-bottom:10px}
-    .kv{
-      display:grid; gap:10px;
-    }
+    .kv{display:grid; gap:10px;}
     .kvItem{
       border:1px solid var(--line);
       border-radius:14px;
@@ -218,25 +177,29 @@
       border-radius:14px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.65);
-      font-weight:700;
+      font-weight:800;
     }
     .quick a:hover{background: var(--chip2)}
 
-    /* 主体三栏（参考图的门户布局） */
+    /* 主体三栏 */
     .mainGrid{
       display:grid;
-      grid-template-columns: 260px 1fr 320px;
+      grid-template-columns: 280px 1fr 320px;
       gap:14px;
       align-items:start;
     }
-    @media (max-width: 1100px){
-      .mainGrid{grid-template-columns: 1fr}
+    @media (max-width: 1100px){ .mainGrid{grid-template-columns: 1fr} }
+
+    /* ✅ 左栏改为堆叠：让左边“自然填满” */
+    .leftStack{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      align-self:stretch;
     }
+
     .box{padding:16px}
-    .boxTitle{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; margin-bottom:10px;
-    }
+    .boxTitle{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;}
     .boxTitle h2{font-size:16px}
     .more{font-size:13px; color:var(--muted)}
     .more:hover{text-decoration:underline; color:var(--text)}
@@ -250,15 +213,36 @@
       border:1px solid var(--line);
       background: rgba(255,255,255,.60);
       color:var(--text);
-      font-weight:700;
+      font-weight:800;
     }
-    .vnav a span{font-size:12px; color:var(--muted); font-weight:600}
+    .vnav a span{font-size:12px; color:var(--muted); font-weight:700}
     .vnav a:hover{background: var(--chip2)}
 
-    /* 中间：重点项目简介 + 板块 */
-    .feature{
-      padding:16px;
+    /* ✅ 左栏新增：快速入口（填空、也更实用） */
+    .shortcutGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
     }
+    .sbtn{
+      display:flex; align-items:center; justify-content:center;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      font-weight:800;
+      text-align:center;
+    }
+    .sbtn:hover{background: var(--chip2)}
+    .smallNote{font-size:12px; color:var(--muted); margin-top:10px; line-height:1.6;}
+
+    /* ✅ 左栏新增：服务信息（再填高度，像正规门户） */
+    .infoList{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px;}
+    .infoList li{margin:6px 0}
+
+    /* 中间：重点项目 */
+    .feature{padding:16px;}
     .feature h2{font-size:18px; margin-bottom:8px}
     .feature p{margin:0 0 10px; color:var(--muted)}
     .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
@@ -286,7 +270,7 @@
     .miniList{margin:0; padding-left:18px; color:var(--muted); font-size:13px}
     .miniList li{margin:6px 0}
 
-    /* 右栏：动态/公告/捐赠 */
+    /* 右栏 */
     .list{display:grid; gap:8px}
     .list a{
       display:block;
@@ -296,30 +280,20 @@
       background: rgba(255,255,255,.60);
       font-size:13px;
       color:var(--text);
+      font-weight:700;
     }
-    .list a small{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+    .list a small{display:block; color:var(--muted); font-size:12px; margin-top:2px; font-weight:600;}
     .list a:hover{background: var(--chip2)}
 
-    .donate{
-      display:grid; gap:10px;
-    }
+    .donate{display:grid; gap:10px;}
     .donate .btn{width:100%}
     .donateNote{font-size:12px; color:var(--muted)}
 
-    /* 下部：故事 + 相册 */
-    .grid2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
+    /* 下部 */
+    .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:14px;}
     @media (max-width: 980px){ .grid2{grid-template-columns:1fr} }
 
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:10px;
-      margin-top:10px;
-    }
+    .gallery{display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin-top:10px;}
     @media (max-width: 980px){ .gallery{grid-template-columns: repeat(2, 1fr);} }
     .ph{
       height:88px;
@@ -328,6 +302,7 @@
       background: rgba(255,255,255,.55);
       display:flex; align-items:center; justify-content:center;
       font-size:12px; color:var(--muted);
+      font-weight:700;
     }
 
     /* 页脚 */
@@ -340,11 +315,7 @@
       color:var(--muted);
       font-size:13px;
     }
-    .footerGrid{
-      display:grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      gap:14px;
-    }
+    .footerGrid{display:grid; grid-template-columns: 1.2fr 1fr 1fr; gap:14px;}
     @media (max-width: 980px){ .footerGrid{grid-template-columns:1fr} }
     .footer b{color:var(--text)}
     .footer a{color:var(--text); text-decoration:underline; text-decoration-color: rgba(244,143,177,.35)}
@@ -353,7 +324,7 @@
 </head>
 
 <body>
-  <!-- 顶部细条（电话/搜索/快捷链接） -->
+  <!-- 顶部细条 -->
   <div class="topbar">
     <div class="wrap topbarIn">
       <div class="topbarLeft">
@@ -373,7 +344,7 @@
     </div>
   </div>
 
-  <!-- 顶部导航（你要的 header 风格） -->
+  <!-- Header -->
   <header class="nav" id="top">
     <div class="wrap navin">
       <a class="brand" href="#top" aria-label="孕乃馨-首页">
@@ -397,7 +368,6 @@
   <main id="home" class="wrap">
     <section class="hero">
       <div class="heroGrid">
-        <!-- Banner -->
         <div class="panel banner">
           <div class="bannerTop">
             <span class="chip"><span class="dot"></span> 民办非营利组织 · 立足社区 · 公益服务</span>
@@ -406,9 +376,7 @@
           </div>
 
           <h1>关爱孕产 · 温暖社区 · 共建健康未来</h1>
-          <p>
-            为孕产妇、哺乳期家庭与新手父母提供可获得的科普教育、健康生活辅导、公益义诊、困难帮扶与社区互助支持。
-          </p>
+          <p>为孕产妇、哺乳期家庭与新手父母提供科普教育、健康生活辅导、公益义诊、困难帮扶与社区互助支持。</p>
 
           <div class="btnRow">
             <a class="btn btnPrimary" href="#projects">查看项目与服务</a>
@@ -430,7 +398,6 @@
           </div>
         </div>
 
-        <!-- 右侧信息卡 -->
         <aside class="panel sideBox" aria-label="机构要点">
           <h3>服务要点</h3>
           <div class="kv">
@@ -451,26 +418,65 @@
       </div>
     </section>
 
-    <!-- 主体：三栏门户布局 -->
+    <!-- ✅ 主体：三栏门户布局（左栏填满方案已做） -->
     <section class="section" id="projects">
       <div class="mainGrid">
-        <!-- 左栏：公益项目 -->
-        <aside class="panel box" aria-label="公益项目">
-          <div class="boxTitle">
-            <h2>公益项目</h2>
-            <a class="more" href="#projects">更多</a>
-          </div>
-          <div class="vnav">
-            <a href="#projects">孕产知识进社区 <span>科普</span></a>
-            <a href="#projects">母乳喂养支持小组 <span>哺乳</span></a>
-            <a href="#projects">产后身心关怀与转介 <span>心理</span></a>
-            <a href="#projects">公益义诊与健康咨询 <span>义诊</span></a>
-            <a href="#projects">困难家庭关爱帮扶 <span>帮扶</span></a>
-            <a href="#projects">社区互助与亲子活动 <span>活动</span></a>
-          </div>
-        </aside>
+        <!-- 左栏：堆叠（解决左下空白） -->
+        <div class="leftStack">
+          <aside class="panel box" aria-label="公益项目">
+            <div class="boxTitle">
+              <h2>公益项目</h2>
+              <a class="more" href="#projects">更多</a>
+            </div>
+            <div class="vnav">
+              <a href="#projects">孕产知识进社区 <span>科普</span></a>
+              <a href="#projects">母乳喂养支持小组 <span>哺乳</span></a>
+              <a href="#projects">产后身心关怀与转介 <span>心理</span></a>
+              <a href="#projects">公益义诊与健康咨询 <span>义诊</span></a>
+              <a href="#projects">困难家庭关爱帮扶 <span>帮扶</span></a>
+              <a href="#projects">社区互助与亲子活动 <span>活动</span></a>
+            </div>
+          </aside>
 
-        <!-- 中间：重点项目简介 + 板块 -->
+          <!-- ✅ 新增块1：快速入口 -->
+          <aside class="panel box" aria-label="快速入口">
+            <div class="boxTitle">
+              <h2>快速入口</h2>
+              <a class="more" href="#join">去报名</a>
+            </div>
+
+            <div class="shortcutGrid">
+              <a class="sbtn" href="#join">志愿者报名</a>
+              <a class="sbtn" href="#donate">捐赠支持</a>
+              <a class="sbtn" href="#news">最新动态</a>
+              <a class="sbtn" href="#open">信息公开</a>
+            </div>
+
+            <div class="smallNote">
+              建议：后续你可以把“志愿者报名/项目报名”接到表单或公众号；把“信息公开”接到章程/年报/财务摘要页面。
+            </div>
+          </aside>
+
+          <!-- ✅ 新增块2：服务信息（进一步填满、也更像机构门户） -->
+          <aside class="panel box" aria-label="服务信息">
+            <div class="boxTitle">
+              <h2>服务信息</h2>
+              <a class="more" href="#contact">更新</a>
+            </div>
+            <ul class="infoList">
+              <li><b>服务时间：</b>工作日 9:00-18:00（活动另行公告）</li>
+              <li><b>服务方式：</b>线下课堂 / 社群支持 / 活动与义诊（按排期）</li>
+              <li><b>报名方式：</b>公众号 / 电话 / 社区合作渠道（后续补齐）</li>
+              <li><b>隐私说明：</b>尊重个人隐私，信息仅用于公益服务联系</li>
+            </ul>
+            <div class="btnRow">
+              <a class="btn btnPrimary" href="#contact">联系咨询</a>
+              <a class="btn" href="#open">合规与说明</a>
+            </div>
+          </aside>
+        </div>
+
+        <!-- 中间：重点项目 -->
         <section class="panel feature" aria-label="重点项目">
           <div class="boxTitle">
             <h2>重点项目介绍</h2>
@@ -483,7 +489,7 @@
             同步提供哺乳支持与同伴社群，必要时对接专业资源与公益义诊，帮助更多家庭获得持续的支持。
           </p>
 
-          <div class="tags" aria-label="标签">
+          <div class="tags">
             <span class="tag">线下课堂</span>
             <span class="tag">社群支持</span>
             <span class="tag">专家志愿者</span>
@@ -551,9 +557,7 @@
             <a class="btn btnPrimary" href="#donate">微信捐赠（后续放二维码）</a>
             <a class="btn" href="#donate">银行转账（后续补信息）</a>
             <a class="btn" href="#donate">物资捐赠（后续补清单）</a>
-            <div class="donateNote">
-              捐赠票据与用途说明：后续在“信息公开”栏目持续更新。
-            </div>
+            <div class="donateNote">捐赠票据与用途说明：后续在“信息公开”栏目持续更新。</div>
           </div>
         </aside>
       </div>
@@ -583,12 +587,12 @@
           </div>
         </div>
 
-        <div class="panel box">
+        <div class="panel box" id="stories">
           <div class="boxTitle">
             <h2>爱心故事</h2>
             <a class="more" href="#stories">更多</a>
           </div>
-          <div class="list" id="stories">
+          <div class="list">
             <a href="#stories">受助家庭故事｜温柔的支持如何发生 <small>图文｜后续补充</small></a>
             <a href="#stories">志愿者故事｜专业与陪伴的力量 <small>图文｜后续补充</small></a>
             <a href="#stories">社区合作故事｜共建更友好的环境 <small>图文｜后续补充</small></a>
@@ -606,7 +610,7 @@
           <a class="more" href="#gallery">更多</a>
         </div>
         <div class="muted" style="font-size:13px;">
-          后续你可以把这里改为真实活动照片缩略图（点击进入相册列表页）。
+          后续可替换为真实活动照片缩略图（点击进入相册列表页）。
         </div>
         <div class="gallery" aria-label="活动相册占位">
           <div class="ph">活动照片 1</div>
@@ -636,7 +640,7 @@
             <li>项目执行公示与反馈渠道</li>
           </ul>
           <div class="muted" style="font-size:12px;margin-top:8px;">
-            说明：上述内容可先用占位，后续再逐项补齐文件与页面链接。
+            说明：可先用占位，后续再逐项补齐文件与页面链接。
           </div>
         </div>
 
