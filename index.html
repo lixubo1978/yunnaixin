@@ -5,31 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>孕乃馨｜民办非营利组织</title>
   <meta name="description" content="孕乃馨民办非营利组织：立足社区，开展孕产与哺乳知识普及、健康生活辅导、公益义诊、困难帮扶及社区公益活动与社交支持。" />
+
   <style>
     :root{
-      /* 主背景：温柔粉 */
-      --bg:#fff1f5;
-
-      /* 卡片背景：浅粉白 */
+      --bg:#fff7fa;
       --card:#ffffff;
+      --muted:#9b7a84;
+      --text:#5a2d3a;
 
-      /* 次要文字：柔灰粉 */
-      --muted:#8a6f76;
+      --brand:#f48fb1;
+      --brand2:#ffd1dc;
 
-      /* 主文字：深玫瑰色 */
-      --text:#4a2b33;
-
-      /* 品牌主色：母婴粉 */
-      --brand:#f5a3b7;
-
-      /* 品牌辅色：奶油粉 */
-      --brand2:#ffd6e2;
-
-      /* 边框线 */
-      --line:rgba(200,120,140,.25);
-
-      /* 阴影更柔 */
-      --shadow: 0 14px 40px rgba(200,120,140,.25);
+      --line:rgba(244,143,177,.25);
+      --shadow: 0 10px 30px rgba(244,143,177,.18);
 
       --radius:18px;
       --max:1100px;
@@ -37,162 +25,90 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", Arial, "Noto Sans CJK SC", sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system,
+        "PingFang SC","Hiragino Sans GB","Microsoft YaHei",
+        Arial,"Noto Sans CJK SC",sans-serif;
       color:var(--text);
-      background:
-      /*  radial-gradient(1200px 700px at 20% 10%, rgba(139,211,221,.18), transparent 60%), */
-      /*  radial-gradient(1000px 700px at 80% 20%, rgba(195,240,202,.14), transparent 55%), */
-      /*  linear-gradient(180deg, #070c16 0%, var(--bg) 55%, #070c16 100%);  */
 
-        url("./main/background-pink.jpeg") no-repeat center top;
-        background-size: cover;
-        background-color: var(--bg);
-
+      background-image: url("/main/background-pink.jpeg");
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      background-color: var(--bg);
 
       line-height:1.7;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    a{color:inherit;text-decoration:none}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 18px;
+    }
+
+    /* 顶部导航 */
     .nav{
-      position:sticky; top:0; z-index:20;
+      position:sticky;
+      top:0;
+      z-index:20;
       backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(7,12,22,.55);
+      background: rgba(255,235,242,.9);
       border-bottom:1px solid var(--line);
     }
-    .navin{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:10px}
-    .brand{
-      display:flex; align-items:center; gap:10px; min-width:160px;
-      font-weight:700; letter-spacing:.5px;
+
+    .navin{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:10px;
     }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:160px;
+      font-weight:700;
+      letter-spacing:.5px;
+    }
+
     .logo{
+      display:inline-block;
       width:34px;
       height:34px;
       border-radius:8px;
-      background: url("./main/logo.jpeg") no-repeat center center;
-      background-size: contain;
+      background-image: url("/main/logo.jpeg");
+      background-repeat:no-repeat;
+      background-position:center center;
+      background-size:contain;
     }
-    .menu{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+
+    .menu{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
     .menu a{
-      padding:8px 10px;
-      border:1px solid transparent;
+      padding:8px 12px;
       border-radius:999px;
-      color:var(--muted);
       font-size:14px;
-    }
-    .menu a:hover{border-color:var(--line); color:var(--text)}
-    .hero{padding:56px 0 22px}
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .heroGrid{grid-template-columns:1fr}
-    }
-    .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .heroMain{padding:28px}
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      font-size:14px;
-    }
-    .kdot{
-      width:8px;height:8px;border-radius:999px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 0 0 4px rgba(139,211,221,.12);
-    }
-    h1{margin:14px 0 8px; font-size:42px; line-height:1.15}
-    @media (max-width: 520px){h1{font-size:34px}}
-    .sub{color:var(--muted); font-size:16px; margin:0 0 18px}
-    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-weight:600;
-      cursor:pointer;
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .btnPrimary{
-      border-color: transparent;
-      background: linear-gradient(135deg, rgba(139,211,221,.92), rgba(195,240,202,.92));
-      color:#07111f;
-    }
-    .note{font-size:13px; color:var(--muted); margin-top:10px}
-    .heroSide{padding:22px}
-    .stat{
-      display:grid; gap:10px;
-    }
-    .statItem{
-      padding:14px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-    }
-    .statItem b{display:block; font-size:16px; margin-bottom:4px}
-    .statItem span{color:var(--muted); font-size:13px}
-    .section{padding:22px 0}
-    .section h2{
-      font-size:22px; margin:0 0 10px;
-    }
-    .section p{margin:0 0 12px; color:var(--muted)}
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    @media (max-width: 900px){.grid3{grid-template-columns:1fr}}
-    .card{
-      padding:18px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    }
-    .card h3{margin:0 0 8px; font-size:16px}
-    .card ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    .pillRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
-    .pill{
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      color: var(--muted);
-      font-size:13px;
-    }
-    .split{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
-    @media (max-width: 900px){.split{grid-template-columns:1fr}}
-    .footer{
-      padding:26px 0 40px;
-      border-top:1px solid var(--line);
       color:var(--muted);
-      font-size:13px;
     }
-    .footer a{color:var(--text); text-decoration:underline; text-decoration-color: rgba(255,255,255,.2)}
-    .small{font-size:13px; color:var(--muted)}
-    .divider{height:1px; background:var(--line); margin:14px 0}
+
+    .menu a:hover{
+      background:rgba(244,143,177,.15);
+      color:var(--text);
+    }
   </style>
 </head>
 
-  
 <body>
   <!-- 顶部导航 -->
   <header class="nav">
@@ -209,6 +125,7 @@
       </nav>
     </div>
   </header>
+
 
   <!-- 首屏 -->
   <main id="top" class="wrap">
