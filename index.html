@@ -110,21 +110,28 @@
   .section{padding:18px 0}
   h1,h2,h3{margin:0}
   .muted{color:var(--muted)}
+
   .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+
   .btn{
     display:inline-flex; align-items:center; justify-content:center;
     padding:10px 12px;
-    border-radius:12px;
+    border-radius:14px;
     border:1px solid var(--line);
     background: rgba(255,255,255,.65);
     font-weight:800;
     cursor:pointer;
+    min-height:44px; /* ✅ 统一高度更齐 */
   }
   .btn:hover{transform: translateY(-1px)}
   .btnPrimary{
     border:0;
     background: linear-gradient(135deg, var(--brand), var(--brand2));
     color:#3b1b26;
+  }
+  /* ✅ 次按钮边框更淡（想彻底无边框可改 border:0） */
+  .btn:not(.btnPrimary){
+    border-color: rgba(244,143,177,.18);
   }
 
   /* 首屏 */
@@ -181,19 +188,17 @@
   }
   .quick a:hover{background: var(--chip2)}
 
-  /* 主体三栏（✅ 对齐修复） */
+  /* 主体三栏 */
   .mainGrid{
     display:grid;
     grid-template-columns: 280px 1fr 320px;
     gap:14px;
-    align-items:stretch; /* ✅ 关键：三列同高拉伸 */
+    align-items:stretch; /* ✅ 三列同高拉伸 */
   }
   @media (max-width: 1100px){ .mainGrid{grid-template-columns: 1fr} }
+  .mainGrid > *{ min-width:0; } /* ✅ 防止内容挤坏 grid */
 
-  /* ✅ 防止内容挤坏 grid */
-  .mainGrid > *{ min-width:0; }
-
-  /* ✅ 三列统一列容器：用于上下沿对齐 */
+  /* ✅ 三列统一列容器：用于上下沿对齐（推荐你外层用 colStack） */
   .colStack{
     display:flex;
     flex-direction:column;
@@ -207,7 +212,7 @@
     flex-direction:column;
   }
 
-  /* 左栏（你原本的 leftStack 仍可用，但建议换成 colStack） */
+  /* 左栏旧类（保留兼容） */
   .leftStack{
     display:flex;
     flex-direction:column;
@@ -250,6 +255,7 @@
     background: rgba(255,255,255,.60);
     font-weight:800;
     text-align:center;
+    min-height:44px;
   }
   .sbtn:hover{background: var(--chip2)}
   .smallNote{font-size:12px; color:var(--muted); margin-top:10px; line-height:1.6;}
@@ -338,15 +344,12 @@
   .footer a{color:var(--text); text-decoration:underline; text-decoration-color: rgba(244,143,177,.35)}
   .footLinks{display:grid; gap:6px}
 
-  /* 赞助单位 + 滚动感谢（填空模块） */
+  /* ✅ 赞助单位 + 滚动感谢：上下结构 */
   .sponsorWrap{
     margin-top:14px;
     display:grid;
-    grid-template-columns: 1.05fr .95fr;
+    grid-template-columns: 1fr; /* ✅ 上下排列 */
     gap:14px;
-  }
-  @media (max-width: 860px){
-    .sponsorWrap{grid-template-columns:1fr;}
   }
 
   .sponsorCard{
@@ -398,12 +401,12 @@
     color:var(--muted);
   }
 
-  /* ✅ 滚动感谢：横向滚动（替换竖排） */
+  /* ✅ 滚动感谢：横向滚动 + 严格限制在自己的框内 */
   .thanksBox{
     border:1px solid var(--line);
     border-radius:14px;
     background: rgba(255,255,255,.65);
-    overflow:hidden;
+    overflow:hidden;              /* ✅ 最外层裁剪，防止跑出框 */
   }
   .thanksHead{
     padding:10px 12px;
@@ -412,15 +415,18 @@
     font-size:13px;
   }
   .thanksMarquee{
-    overflow:hidden;
+    position:relative;
+    overflow:hidden;              /* ✅ 再裁一次，双保险 */
+    max-width:100%;
     padding:10px 12px 12px;
   }
   .thanksTrack{
-    display:flex;
+    display:inline-flex;
     gap:10px;
     align-items:center;
-    width:max-content;
     white-space:nowrap;
+    width:max-content;
+    will-change: transform;
     animation: thanksScrollX 18s linear infinite;
   }
   .thanksItem{
@@ -446,10 +452,25 @@
   }
   @keyframes thanksScrollX{
     0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    100% { transform: translateX(-50%); } /* ✅ 需要 track 内放两份相同内容 */
   }
   .thanksMarquee:hover .thanksTrack{ animation-play-state: paused; }
+
+  /* ✅ 三个栏目底部对齐：按钮/底部动作自动贴底 */
+  .box,
+  .feature,
+  .donate{
+    display:flex;
+    flex-direction:column;
+  }
+  .box .btnRow,
+  .feature .btnRow{
+    margin-top:auto; /* ✅ 联系咨询 / 我要参与与支持 等按钮贴底 */
+  }
+  .donate{ margin-top:auto; } /* ✅ 右侧捐赠模块整体更稳 */
+
 </style>
+
 
 </head>
 
