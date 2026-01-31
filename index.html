@@ -121,7 +121,7 @@
     background: rgba(255,255,255,.65);
     font-weight:800;
     cursor:pointer;
-    min-height:44px; /* ✅ 统一高度更齐 */
+    min-height:44px;
   }
   .btn:hover{transform: translateY(-1px)}
   .btnPrimary{
@@ -129,7 +129,6 @@
     background: linear-gradient(135deg, var(--brand), var(--brand2));
     color:#3b1b26;
   }
-  /* ✅ 次按钮边框更淡（想彻底无边框可改 border:0） */
   .btn:not(.btnPrimary){
     border-color: rgba(244,143,177,.18);
   }
@@ -193,26 +192,26 @@
     display:grid;
     grid-template-columns: 280px 1fr 320px;
     gap:14px;
-    align-items:stretch; /* ✅ 三列同高拉伸 */
+    align-items:stretch;
   }
   @media (max-width: 1100px){ .mainGrid{grid-template-columns: 1fr} }
-  .mainGrid > *{ min-width:0; } /* ✅ 防止内容挤坏 grid */
+  .mainGrid > *{ min-width:0; }
 
-  /* ✅ 三列统一列容器：用于上下沿对齐（推荐你外层用 colStack） */
+  /* 三列统一列容器（如果你外层用 colStack，会更容易三列下沿对齐） */
   .colStack{
     display:flex;
     flex-direction:column;
     gap:14px;
     min-height:100%;
   }
-  /* ✅ 每列最后一张卡自动撑满补齐高度 -> 下沿齐 */
   .colStack > .panel:last-child{
     flex:1;
     display:flex;
     flex-direction:column;
+    min-height:0; /* ✅ 允许内部做滚动，不溢出 */
   }
 
-  /* 左栏旧类（保留兼容） */
+  /* 左栏旧类兼容 */
   .leftStack{
     display:flex;
     flex-direction:column;
@@ -344,12 +343,14 @@
   .footer a{color:var(--text); text-decoration:underline; text-decoration-color: rgba(244,143,177,.35)}
   .footLinks{display:grid; gap:6px}
 
-  /* ✅ 赞助单位 + 滚动感谢：上下结构 */
+  /* 赞助单位 + 滚动感谢：上下结构 */
   .sponsorWrap{
     margin-top:14px;
-    display:grid;
-    grid-template-columns: 1fr; /* ✅ 上下排列 */
+    display:flex;              /* ✅ 用 flex 更好控制“裁切空白/滚动” */
+    flex-direction:column;
     gap:14px;
+    flex:1;                    /* ✅ 占满父容器剩余高度，避免底部空白 */
+    min-height:0;              /* ✅ 允许内部滚动，不溢出 */
   }
 
   .sponsorCard{
@@ -357,6 +358,10 @@
     border-radius: var(--radius);
     border:1px solid var(--line);
     background: rgba(255,255,255,.60);
+    display:flex;              /* ✅ 让列表区域可滚动并吃掉剩余空间 */
+    flex-direction:column;
+    min-height:0;
+    overflow:hidden;           /* ✅ 防止内容溢出中间大框 */
   }
 
   .sponsorTitle{
@@ -365,6 +370,7 @@
     justify-content:space-between;
     gap:10px;
     margin-bottom:10px;
+    flex:0 0 auto;
   }
   .sponsorTitle h3{
     font-size:14px;
@@ -376,14 +382,27 @@
   }
   .sponsorTitle a:hover{color:var(--text); text-decoration:underline;}
 
+  /* ✅ 赞助单位：不要平铺，改成“纵向列表 + 内部滚动条” */
   .sponsorGrid{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
+    display:flex;
+    flex-direction:column;
     gap:10px;
+    overflow-y:auto;           /* ✅ 纵向滚动条 */
+    padding-right:6px;         /* ✅ 给滚动条留空间，视觉更干净 */
+    min-height:0;
+    max-height:220px;          /* ✅ 控制在卡片内，不会把中间框撑爆 */
   }
-  @media (max-width: 520px){
-    .sponsorGrid{grid-template-columns:1fr;}
+  /* 滚动条更轻薄（可选） */
+  .sponsorGrid::-webkit-scrollbar{ width:8px; }
+  .sponsorGrid::-webkit-scrollbar-thumb{
+    background: rgba(244,143,177,.22);
+    border-radius:999px;
   }
+  .sponsorGrid::-webkit-scrollbar-track{
+    background: rgba(255,255,255,.35);
+    border-radius:999px;
+  }
+
   .sponsorItem{
     border:1px solid var(--line);
     border-radius:14px;
@@ -401,12 +420,13 @@
     color:var(--muted);
   }
 
-  /* ✅ 滚动感谢：横向滚动 + 严格限制在自己的框内 */
+  /* 滚动感谢：横向滚动 + 严格限制在自己的框内 */
   .thanksBox{
     border:1px solid var(--line);
     border-radius:14px;
     background: rgba(255,255,255,.65);
-    overflow:hidden;              /* ✅ 最外层裁剪，防止跑出框 */
+    overflow:hidden;
+    flex:0 0 auto;             /* ✅ 不拉伸，避免带来空白 */
   }
   .thanksHead{
     padding:10px 12px;
@@ -416,7 +436,7 @@
   }
   .thanksMarquee{
     position:relative;
-    overflow:hidden;              /* ✅ 再裁一次，双保险 */
+    overflow:hidden;
     max-width:100%;
     padding:10px 12px 12px;
   }
@@ -452,23 +472,29 @@
   }
   @keyframes thanksScrollX{
     0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* ✅ 需要 track 内放两份相同内容 */
+    100% { transform: translateX(-50%); }
   }
   .thanksMarquee:hover .thanksTrack{ animation-play-state: paused; }
 
-  /* ✅ 三个栏目底部对齐：按钮/底部动作自动贴底 */
+  /* 三个栏目底部对齐：按钮/底部动作自动贴底 */
   .box,
   .feature,
   .donate{
     display:flex;
     flex-direction:column;
+    min-height:0;
   }
   .box .btnRow,
   .feature .btnRow{
-    margin-top:auto; /* ✅ 联系咨询 / 我要参与与支持 等按钮贴底 */
+    margin-top:auto;
   }
-  .donate{ margin-top:auto; } /* ✅ 右侧捐赠模块整体更稳 */
 
+  /* ✅ 关键：让“中间大框”里的赞助模块把空白吃掉（空白往上裁切） */
+  .feature .sponsorWrap{
+    margin-top:14px;
+    flex:1;         /* ✅ 把中间剩余高度分给 sponsorWrap，而不是留空白 */
+    min-height:0;
+  }
 </style>
 
 
