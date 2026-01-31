@@ -10,22 +10,24 @@
     :root{
       --bg:#fff7fa;
       --card:#ffffff;
-      --muted:#9b7a84;
-      --text:#5a2d3a;
+      --muted:#8f6f79;
+      --text:#4b2432;
 
       --brand:#f48fb1;
       --brand2:#ffd1dc;
 
       --line:rgba(244,143,177,.25);
       --shadow: 0 10px 30px rgba(244,143,177,.18);
+      --radius:16px;
+      --max:1200px;
 
-      --radius:18px;
-      --max:1100px;
+      --pinkbar: rgba(255,235,242,.92);
+      --chip: rgba(244,143,177,.14);
+      --chip2: rgba(255,209,220,.45);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
-
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system,
@@ -33,132 +35,414 @@
         Arial,"Noto Sans CJK SC",sans-serif;
       color:var(--text);
 
-      background-image: url("/main/background-pink.jpeg");
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: cover;
-      background-color: var(--bg);
-
+      /* ✅ 同目录：index.html、logo.jpeg、background-pink.jpeg */
+      background-image: url("./background-pink.jpeg");
+      background-repeat:no-repeat;
+      background-position:center top;
+      background-size:cover;
+      background-color:var(--bg);
       line-height:1.7;
     }
 
-    a{color:inherit;text-decoration:none}
-
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:0 18px;
+    /* ✅ 轻薄粉色遮罩：让背景更“看得见”，但不晦涩 */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background: rgba(255, 245, 249, 0.40);
+      z-index:-1;
     }
 
-    /* 顶部导航 */
-    .nav{
-      position:sticky;
-      top:0;
-      z-index:20;
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* 顶部细条 */
+    .topbar{
+      background: rgba(255,255,255,.55);
+      border-bottom:1px solid var(--line);
       backdrop-filter:saturate(140%) blur(10px);
-      background: rgba(255,235,242,.9);
+      font-size:13px;
+      color:var(--muted);
+    }
+    .topbarIn{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:8px 0;
+    }
+    .topbarLeft{display:flex; gap:14px; flex-wrap:wrap}
+    .topbarRight{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+    .search{
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      border-radius:999px;
+      padding:6px 10px;
+    }
+    .search input{
+      border:0; outline:none; background:transparent;
+      font-size:13px; width:180px; color:var(--text);
+    }
+    .miniLink{color:var(--muted)}
+    .miniLink:hover{color:var(--text); text-decoration:underline}
+
+    /* Header（你要的刚才那种粉色玻璃感） */
+    .nav{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(140%) blur(10px);
+      background: var(--pinkbar);
       border-bottom:1px solid var(--line);
     }
-
     .navin{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 0;
-      gap:10px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:12px;
     }
-
     .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:160px;
-      font-weight:700;
-      letter-spacing:.5px;
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.5px;
+      min-width:200px;
     }
-
     .logo{
-      display:inline-block;
-      width:34px;
-      height:34px;
+      display:inline-block;          /* ✅ 必须有 */
+      width:34px; height:34px;
       border-radius:8px;
-      background-image: url("/main/logo.jpeg");
+      background-image:url("./logo.jpeg");
       background-repeat:no-repeat;
-      background-position:center center;
+      background-position:center;
       background-size:contain;
     }
-
-    .menu{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
+    .menu{display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end}
     .menu a{
       padding:8px 12px;
       border-radius:999px;
       font-size:14px;
       color:var(--muted);
     }
+    .menu a:hover{background:var(--chip); color:var(--text)}
 
-    .menu a:hover{
-      background:rgba(244,143,177,.15);
+    /* 通用卡片 */
+    .panel{
+      background: rgba(255,255,255,.70);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(2px);
+    }
+    .section{padding:18px 0}
+    h1,h2,h3{margin:0}
+    .muted{color:var(--muted)}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btnPrimary{
+      border:0;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color:#3b1b26;
+    }
+
+    /* 首屏：banner + 快捷入口 */
+    .hero{padding:18px 0 8px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .heroGrid{grid-template-columns:1fr} }
+
+    .banner{
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .bannerTop{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.55);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+    }
+    .banner h1{
+      margin:10px 0 8px;
+      font-size:40px;
+      line-height:1.12;
+      letter-spacing:.5px;
+    }
+    @media (max-width:520px){ .banner h1{font-size:32px} }
+    .banner p{margin:0; color:var(--muted)}
+    .bannerNote{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .sideBox{padding:16px}
+    .sideBox h3{font-size:15px; margin-bottom:10px}
+    .kv{
+      display:grid; gap:10px;
+    }
+    .kvItem{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background: rgba(255,255,255,.55);
+      padding:12px;
+    }
+    .kvItem b{display:block; margin-bottom:4px}
+    .kvItem span{font-size:13px; color:var(--muted)}
+
+    .quick{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    @media (max-width:980px){ .quick{grid-template-columns: repeat(2, 1fr);} }
+    .quick a{
+      display:flex; align-items:center; justify-content:center;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      font-weight:700;
+    }
+    .quick a:hover{background: var(--chip2)}
+
+    /* 主体三栏（参考图的门户布局） */
+    .mainGrid{
+      display:grid;
+      grid-template-columns: 260px 1fr 320px;
+      gap:14px;
+      align-items:start;
+    }
+    @media (max-width: 1100px){
+      .mainGrid{grid-template-columns: 1fr}
+    }
+    .box{padding:16px}
+    .boxTitle{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin-bottom:10px;
+    }
+    .boxTitle h2{font-size:16px}
+    .more{font-size:13px; color:var(--muted)}
+    .more:hover{text-decoration:underline; color:var(--text)}
+
+    /* 左栏：公益项目 */
+    .vnav{display:grid; gap:8px; margin-top:6px}
+    .vnav a{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      color:var(--text);
+      font-weight:700;
+    }
+    .vnav a span{font-size:12px; color:var(--muted); font-weight:600}
+    .vnav a:hover{background: var(--chip2)}
+
+    /* 中间：重点项目简介 + 板块 */
+    .feature{
+      padding:16px;
+    }
+    .feature h2{font-size:18px; margin-bottom:8px}
+    .feature p{margin:0 0 10px; color:var(--muted)}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      font-size:12px; color:var(--muted);
+    }
+    .split2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 860px){ .split2{grid-template-columns:1fr} }
+    .miniCard{
+      padding:14px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.60);
+    }
+    .miniCard h3{font-size:14px; margin-bottom:6px}
+    .miniList{margin:0; padding-left:18px; color:var(--muted); font-size:13px}
+    .miniList li{margin:6px 0}
+
+    /* 右栏：动态/公告/捐赠 */
+    .list{display:grid; gap:8px}
+    .list a{
+      display:block;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background: rgba(255,255,255,.60);
+      font-size:13px;
       color:var(--text);
     }
+    .list a small{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+    .list a:hover{background: var(--chip2)}
+
+    .donate{
+      display:grid; gap:10px;
+    }
+    .donate .btn{width:100%}
+    .donateNote{font-size:12px; color:var(--muted)}
+
+    /* 下部：故事 + 相册 */
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){ .grid2{grid-template-columns:1fr} }
+
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 980px){ .gallery{grid-template-columns: repeat(2, 1fr);} }
+    .ph{
+      height:88px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      display:flex; align-items:center; justify-content:center;
+      font-size:12px; color:var(--muted);
+    }
+
+    /* 页脚 */
+    .footer{
+      margin-top:16px;
+      padding:22px 0 34px;
+      border-top:1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(6px);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footerGrid{
+      display:grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){ .footerGrid{grid-template-columns:1fr} }
+    .footer b{color:var(--text)}
+    .footer a{color:var(--text); text-decoration:underline; text-decoration-color: rgba(244,143,177,.35)}
+    .footLinks{display:grid; gap:6px}
   </style>
 </head>
 
 <body>
-  <!-- 顶部导航 -->
-  <header class="nav">
+  <!-- 顶部细条（电话/搜索/快捷链接） -->
+  <div class="topbar">
+    <div class="wrap topbarIn">
+      <div class="topbarLeft">
+        <span>服务时间：周一至周五 9:00-18:00</span>
+        <span>咨询电话：<b>（待补充）</b></span>
+        <span>邮箱：<b>（待补充）</b></span>
+      </div>
+
+      <div class="topbarRight">
+        <div class="search" role="search">
+          <span aria-hidden="true">🔎</span>
+          <input type="text" placeholder="站内搜索（后续接入）" />
+        </div>
+        <a class="miniLink" href="#open">信息公开</a>
+        <a class="miniLink" href="#contact">联系我们</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 顶部导航（你要的 header 风格） -->
+  <header class="nav" id="top">
     <div class="wrap navin">
       <a class="brand" href="#top" aria-label="孕乃馨-首页">
         <span class="logo" aria-hidden="true"></span>
         <span>孕乃馨</span>
       </a>
+
       <nav class="menu" aria-label="站点导航">
-        <a href="#about">关于我们</a>
-        <a href="#vision">愿景</a>
-        <a href="#scope">宗旨与业务范围</a>
-        <a href="#join">加入我们</a>
+        <a href="#home">首页</a>
+        <a href="#about">组织概况</a>
+        <a href="#projects">项目与服务</a>
+        <a href="#news">资讯动态</a>
+        <a href="#open">信息公开</a>
+        <a href="#join">参与支持</a>
+        <a href="#contact">联系我们</a>
       </nav>
     </div>
   </header>
 
-
   <!-- 首屏 -->
-  <main id="top" class="wrap">
+  <main id="home" class="wrap">
     <section class="hero">
       <div class="heroGrid">
-        <div class="panel heroMain">
-          <div class="kicker"><span class="kdot"></span>民办非营利组织｜立足社区｜公益服务</div>
+        <!-- Banner -->
+        <div class="panel banner">
+          <div class="bannerTop">
+            <span class="chip"><span class="dot"></span> 民办非营利组织 · 立足社区 · 公益服务</span>
+            <span class="chip">孕产/哺乳知识普及</span>
+            <span class="chip">社交支持与帮扶</span>
+          </div>
+
           <h1>关爱孕产 · 温暖社区 · 共建健康未来</h1>
-          <p class="sub">
-            <b>孕乃馨</b>以孕产妇及婴幼儿家庭为核心服务对象，聚焦孕期、产后及哺乳阶段的身心健康需求，
-            通过知识普及、健康生活辅导、公益义诊、困难帮扶与社区活动，提供有温度、可持续的社会支持。
+          <p>
+            为孕产妇、哺乳期家庭与新手父母提供可获得的科普教育、健康生活辅导、公益义诊、困难帮扶与社区互助支持。
           </p>
 
-          <div class="ctaRow">
-            <a class="btn btnPrimary" href="#scope">查看宗旨与业务范围</a>
+          <div class="btnRow">
+            <a class="btn btnPrimary" href="#projects">查看项目与服务</a>
             <a class="btn" href="#join">成为志愿者 / 合作伙伴</a>
+            <a class="btn" href="#donate">我要捐赠</a>
           </div>
-          <div class="note small">
-            提示：本网站内容用于公益科普与社区支持，不替代医疗诊断与治疗；如有紧急情况请及时就医或拨打当地急救电话。
+
+          <div class="bannerNote">
+            提示：本站内容用于公益科普与社区支持，不替代医疗诊断与治疗；如有紧急情况请及时就医或拨打急救电话。
+          </div>
+
+          <div class="quick" aria-label="快捷入口">
+            <a href="#projects">孕产课堂</a>
+            <a href="#projects">哺乳支持</a>
+            <a href="#projects">公益义诊</a>
+            <a href="#projects">困难帮扶</a>
+            <a href="#join">志愿者报名</a>
+            <a href="#donate">捐赠支持</a>
           </div>
         </div>
 
-        <aside class="panel heroSide">
-          <div class="stat">
-            <div class="statItem">
+        <!-- 右侧信息卡 -->
+        <aside class="panel sideBox" aria-label="机构要点">
+          <h3>服务要点</h3>
+          <div class="kv">
+            <div class="kvItem">
               <b>服务方向</b>
-              <span>孕产科普｜健康生活指导｜公益义诊｜困难帮扶｜社区互助与社交支持</span>
+              <span>孕产科普｜哺乳支持｜公益义诊｜心理关怀｜困难帮扶｜社区活动</span>
             </div>
-            <div class="statItem">
+            <div class="kvItem">
               <b>服务对象</b>
-              <span>孕产妇、哺乳期母亲、新手父母及婴幼儿家庭（含特殊困难家庭）</span>
+              <span>孕产妇、哺乳期家庭、新手父母及婴幼儿家庭（含困难家庭）</span>
             </div>
-            <div class="statItem">
+            <div class="kvItem">
               <b>我们的承诺</b>
               <span>公益为本｜专业支持｜尊重隐私｜合规开展｜长期陪伴</span>
             </div>
@@ -167,108 +451,252 @@
       </div>
     </section>
 
-    <!-- 关于我们 -->
-    <section id="about" class="section">
-      <h2>关于孕乃馨</h2>
-      <p>
-        孕乃馨是一家以公益性、非营利性为原则的民办非营利组织。我们相信：每一位母亲都值得被专业守护，
-        每一个新生命都应在关爱中成长。我们在社区中连接家庭、志愿者与专业力量，让科学知识更易获得，让支持更及时可达。
-      </p>
-      <div class="pillRow">
-        <span class="pill">公益为本</span>
-        <span class="pill">专业支持</span>
-        <span class="pill">社区共建</span>
-        <span class="pill">长期陪伴</span>
-        <span class="pill">尊重与隐私保护</span>
+    <!-- 主体：三栏门户布局 -->
+    <section class="section" id="projects">
+      <div class="mainGrid">
+        <!-- 左栏：公益项目 -->
+        <aside class="panel box" aria-label="公益项目">
+          <div class="boxTitle">
+            <h2>公益项目</h2>
+            <a class="more" href="#projects">更多</a>
+          </div>
+          <div class="vnav">
+            <a href="#projects">孕产知识进社区 <span>科普</span></a>
+            <a href="#projects">母乳喂养支持小组 <span>哺乳</span></a>
+            <a href="#projects">产后身心关怀与转介 <span>心理</span></a>
+            <a href="#projects">公益义诊与健康咨询 <span>义诊</span></a>
+            <a href="#projects">困难家庭关爱帮扶 <span>帮扶</span></a>
+            <a href="#projects">社区互助与亲子活动 <span>活动</span></a>
+          </div>
+        </aside>
+
+        <!-- 中间：重点项目简介 + 板块 -->
+        <section class="panel feature" aria-label="重点项目">
+          <div class="boxTitle">
+            <h2>重点项目介绍</h2>
+            <a class="more" href="#projects">查看全部项目</a>
+          </div>
+
+          <h2 style="font-size:18px;margin:0 0 6px;">“孕产健康与哺乳支持”社区行动</h2>
+          <p>
+            面向社区孕产妇与婴幼儿家庭，开展可理解、可获得的健康科普与生活方式指导；
+            同步提供哺乳支持与同伴社群，必要时对接专业资源与公益义诊，帮助更多家庭获得持续的支持。
+          </p>
+
+          <div class="tags" aria-label="标签">
+            <span class="tag">线下课堂</span>
+            <span class="tag">社群支持</span>
+            <span class="tag">专家志愿者</span>
+            <span class="tag">困难帮扶</span>
+            <span class="tag">隐私保护</span>
+          </div>
+
+          <div class="split2">
+            <div class="miniCard">
+              <h3>我们提供什么</h3>
+              <ul class="miniList">
+                <li>孕期与产后科普讲座（常见问题与误区）</li>
+                <li>哺乳支持：姿势、含接、乳房护理等</li>
+                <li>健康生活辅导：营养、运动、睡眠管理</li>
+                <li>公益义诊与咨询（按活动排期）</li>
+              </ul>
+            </div>
+
+            <div class="miniCard">
+              <h3>如何参与</h3>
+              <ul class="miniList">
+                <li>个人：报名课程/加入互助群</li>
+                <li>志愿者：医疗/科普/社工/运营等</li>
+                <li>机构：社区共建、项目合作、场地支持</li>
+                <li>捐赠：物资/资金/服务资源支持</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="btnRow">
+            <a class="btn btnPrimary" href="#join">我要参与支持</a>
+            <a class="btn" href="#news">查看最新动态</a>
+            <a class="btn" href="#open">信息公开与合规</a>
+          </div>
+        </section>
+
+        <!-- 右栏：动态/公告/捐赠 -->
+        <aside class="panel box" aria-label="资讯与公告">
+          <div class="boxTitle" id="news">
+            <h2>基金会动态</h2>
+            <a class="more" href="#news">更多</a>
+          </div>
+          <div class="list" style="margin-bottom:12px;">
+            <a href="#news">社区孕产课堂｜本周课程安排 <small>更新：YYYY-MM-DD</small></a>
+            <a href="#news">母乳喂养支持小组｜报名开启 <small>更新：YYYY-MM-DD</small></a>
+            <a href="#news">公益义诊｜本月服务点位发布 <small>更新：YYYY-MM-DD</small></a>
+            <a href="#news">社区亲子活动｜活动回顾图文 <small>更新：YYYY-MM-DD</small></a>
+          </div>
+
+          <div class="boxTitle" style="margin-top:6px;">
+            <h2>通知公告</h2>
+            <a class="more" href="#open">更多</a>
+          </div>
+          <div class="list" style="margin-bottom:12px;">
+            <a href="#open">志愿者招募｜长期招募（医疗/科普/社工）<small>公告：YYYY-MM-DD</small></a>
+            <a href="#open">合作征集｜社区/机构共建合作意向 <small>公告：YYYY-MM-DD</small></a>
+            <a href="#open">信息公开｜章程/年报/财务摘要更新 <small>公告：YYYY-MM-DD</small></a>
+          </div>
+
+          <div class="boxTitle" id="donate">
+            <h2>捐赠通道</h2>
+            <a class="more" href="#donate">说明</a>
+          </div>
+          <div class="donate">
+            <a class="btn btnPrimary" href="#donate">微信捐赠（后续放二维码）</a>
+            <a class="btn" href="#donate">银行转账（后续补信息）</a>
+            <a class="btn" href="#donate">物资捐赠（后续补清单）</a>
+            <div class="donateNote">
+              捐赠票据与用途说明：后续在“信息公开”栏目持续更新。
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <!-- 愿景 -->
-    <section id="vision" class="section">
-      <div class="panel" style="padding:20px;">
-        <h2 style="margin-top:0">我们的愿景</h2>
-        <p style="margin-bottom:0">
-          打造一个<strong>有温度、有专业、有支持力</strong>的孕产妇社区公益平台，
-          让科学的孕产知识触手可及，让需要帮助的家庭不再孤立无援：
-        </p>
-        <div class="divider"></div>
-        <div class="pillRow" style="margin-top:0">
-          <span class="pill">让健康知识走进社区</span>
-          <span class="pill">让公益服务真正落地</span>
-          <span class="pill">让孕产妇获得尊重、支持与陪伴</span>
+    <!-- 下部：关于我们 + 爱心故事 -->
+    <section class="section" id="about">
+      <div class="grid2">
+        <div class="panel box">
+          <div class="boxTitle">
+            <h2>组织概况</h2>
+            <a class="more" href="#about">更多</a>
+          </div>
+          <p class="muted" style="margin:0 0 10px;">
+            孕乃馨是一家以公益性、非营利性为原则的民办非营利组织。我们希望通过专业科普与社区支持，帮助更多孕产与婴幼儿家庭获得长期、可靠、可持续的社会支持。
+          </p>
+          <div class="tags">
+            <span class="tag">公益为本</span>
+            <span class="tag">专业支持</span>
+            <span class="tag">社区共建</span>
+            <span class="tag">隐私保护</span>
+            <span class="tag">长期陪伴</span>
+          </div>
+          <div class="btnRow">
+            <a class="btn btnPrimary" href="#open">章程与信息公开</a>
+            <a class="btn" href="#contact">联系我们</a>
+          </div>
+        </div>
+
+        <div class="panel box">
+          <div class="boxTitle">
+            <h2>爱心故事</h2>
+            <a class="more" href="#stories">更多</a>
+          </div>
+          <div class="list" id="stories">
+            <a href="#stories">受助家庭故事｜温柔的支持如何发生 <small>图文｜后续补充</small></a>
+            <a href="#stories">志愿者故事｜专业与陪伴的力量 <small>图文｜后续补充</small></a>
+            <a href="#stories">社区合作故事｜共建更友好的环境 <small>图文｜后续补充</small></a>
+            <a href="#stories">项目回顾｜一次课堂改变的认知 <small>图文｜后续补充</small></a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 宗旨与业务范围（官网版本） -->
-    <section id="scope" class="section">
-      <h2>宗旨与业务范围（官网版）</h2>
-
-      <div class="split">
-        <div class="card">
-          <h3>一、宗旨</h3>
-          <p>
-            孕乃馨民办非营利组织以关爱孕产妇及婴幼儿家庭身心健康为宗旨，坚持公益性、非营利性原则，
-            立足社区，面向家庭，围绕孕期、产后及哺乳阶段开展公益服务与社会支持工作。
-          </p>
-          <p>
-            本组织致力于通过科学知识普及、健康生活指导、公益服务与社区支持，提升孕产妇及家庭的健康意识与生活质量，
-            缓解孕产阶段面临的实际困难与心理压力，促进家庭和谐与社区互助，助力构建健康、包容、可持续的社区环境。
-          </p>
+    <!-- 相册区 -->
+    <section class="section" id="gallery">
+      <div class="panel box">
+        <div class="boxTitle">
+          <h2>公益图片</h2>
+          <a class="more" href="#gallery">更多</a>
         </div>
-
-        <div class="card">
-          <h3>三、业务开展原则</h3>
-          <ul>
-            <li>坚持公益性、非营利性，不从事营利性活动；</li>
-            <li>遵守法律法规及行业规范，依法依规开展业务；</li>
-            <li>尊重隐私，保护服务对象合法权益；</li>
-            <li>注重专业性与社会责任并重。</li>
-          </ul>
-          <div class="divider"></div>
-          <p class="small" style="margin:0">
-            如需用于章程备案/登记材料，可在本版本基础上进一步压缩为“章程版”措辞。
-          </p>
+        <div class="muted" style="font-size:13px;">
+          后续你可以把这里改为真实活动照片缩略图（点击进入相册列表页）。
+        </div>
+        <div class="gallery" aria-label="活动相册占位">
+          <div class="ph">活动照片 1</div>
+          <div class="ph">活动照片 2</div>
+          <div class="ph">活动照片 3</div>
+          <div class="ph">活动照片 4</div>
+          <div class="ph">活动照片 5</div>
+          <div class="ph">活动照片 6</div>
+          <div class="ph">活动照片 7</div>
+          <div class="ph">活动照片 8</div>
         </div>
       </div>
+    </section>
 
-      <div style="height:14px"></div>
-
-      <div class="grid3">
-        <div class="card">
-          <h3>（一）孕产与哺乳相关知识普及</h3>
-          <ul>
-            <li>开展孕期、产后及哺乳期相关的公益知识宣传与科普活动；</li>
-            <li>组织孕产妇健康讲座、公益课堂及科普活动；</li>
-            <li>制作并传播科学、规范的孕产与育儿知识资料；</li>
-            <li>通过线上与线下相结合的方式提升公众健康认知水平。</li>
+    <!-- 信息公开 / 参与支持 -->
+    <section class="section" id="open">
+      <div class="grid2">
+        <div class="panel box">
+          <div class="boxTitle">
+            <h2>信息公开</h2>
+            <a class="more" href="#open">入口</a>
+          </div>
+          <ul class="miniList">
+            <li>组织章程（PDF/页面）</li>
+            <li>年度工作报告/年报</li>
+            <li>财务摘要与捐赠使用说明</li>
+            <li>项目执行公示与反馈渠道</li>
           </ul>
+          <div class="muted" style="font-size:12px;margin-top:8px;">
+            说明：上述内容可先用占位，后续再逐项补齐文件与页面链接。
+          </div>
         </div>
 
-        <div class="card">
-          <h3>（二）孕产妇健康生活方式辅导</h3>
-          <ul>
-            <li>提供孕期及产后健康生活方式的公益指导；</li>
-            <li>开展情绪调适、心理支持与家庭支持相关的公益活动；</li>
-            <li>引导科学作息、合理营养与健康行为习惯；</li>
-            <li>鼓励家庭成员参与孕产支持，提升家庭照护能力。</li>
+        <div class="panel box" id="join">
+          <div class="boxTitle">
+            <h2>参与支持</h2>
+            <a class="more" href="#join">加入</a>
+          </div>
+          <ul class="miniList">
+            <li>志愿者：医疗/护理/科普讲师/社工/运营</li>
+            <li>合作伙伴：社区、医院、企业、媒体支持</li>
+            <li>捐赠支持：资金/物资/服务资源</li>
+            <li>反馈建议：共建更友好的孕产支持网络</li>
           </ul>
+          <div class="btnRow">
+            <a class="btn btnPrimary" href="#contact">报名/合作咨询</a>
+            <a class="btn" href="#donate">捐赠支持</a>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="card">
-          <h3>（三）公益义诊与健康支持服务</h3>
-          <ul>
-            <li>联合具备资质的医疗与健康专业人士开展公益义诊活动；</li>
-            <li>提供基础健康咨询、健康评估及健康知识指导；</li>
-            <li>组织社区健康服务活动与公益健康日；</li>
-            <li>在合法合规前提下，为有需要的人群提供健康支持与转介服务。</li>
-          </ul>
+    <!-- 联系方式 -->
+    <section class="section" id="contact">
+      <div class="panel box">
+        <div class="boxTitle">
+          <h2>联系我们</h2>
+          <a class="more" href="#contact">更新</a>
         </div>
+        <div class="muted">
+          地址：（待补充）　电话：（待补充）　邮箱：（待补充）<br />
+          微信公众号/视频号：后续放二维码与入口
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <div class="card">
-          <h3>（四）困难孕产家庭帮扶</h3>
-          <ul>
-            <li>关注经济困难或特殊情况的孕产家庭；</li>
-            <li>通过公益项目提供必要的帮扶与支持；</li>
-            <li>协助对接医疗、心理及社会公益资源；</li>
-            <li
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="wrap footerGrid">
+      <div>
+        <b>孕乃馨｜民办非营利组织</b><br />
+        <span>立足社区，提供孕产与哺乳支持、健康科普、公益义诊与困难帮扶。</span>
+      </div>
+
+      <div class="footLinks">
+        <b>常用入口</b>
+        <a href="#projects">项目与服务</a>
+        <a href="#news">资讯动态</a>
+        <a href="#open">信息公开</a>
+        <a href="#join">参与支持</a>
+      </div>
+
+      <div class="footLinks">
+        <b>备案与声明</b>
+        <span>ICP备案：后续补充</span>
+        <span>公安备案：后续补充</span>
+        <span>Copyright © 孕乃馨</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
