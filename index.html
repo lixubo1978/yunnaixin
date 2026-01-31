@@ -461,6 +461,29 @@
     100% { transform: translateX(-50%); }
   }
   .thanksMarquee:hover .thanksTrack{ animation-play-state: paused; }
+
+  /* ✅ 裁切“滚动感谢”与“如何参与”之间的空白，让两块靠在一起 */
+.thanksBox{
+  margin-bottom: 10px !important;   /* 感谢模块底部间距缩小 */
+}
+
+/* 常见情况：下面紧跟着就是“如何参与”的卡片（panel/box/feature 任一类） */
+.thanksBox + .panel,
+.thanksBox + .box,
+.thanksBox + .feature{
+  margin-top: 0 !important;         /* 直接贴上来 */
+}
+
+/* 如果“如何参与”外层是某个 section（常见 id=join），也把 section 的上内边距裁掉 */
+#join.section{
+  padding-top: 6px !important;      /* 原来 18px 太大，缩小 */
+}
+
+/* 兜底：中间栏里所有 panel 之间如果被撑出巨空白，统一把“上外边距”压扁 */
+.mainGrid .panel{
+  margin-top: 0;
+}
+
 </style>
 
 
