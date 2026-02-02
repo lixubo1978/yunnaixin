@@ -1,1 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>银行转账信息</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+                   "Microsoft YaHei", Arial, sans-serif;
+      background: #f6f7fb;
+      color: #333;
+    }
+
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      max-width: 640px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-size: 26px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .info {
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .row {
+      display: flex;
+      margin-bottom: 14px;
+    }
+
+    .label {
+      width: 110px;
+      color: #666;
+      flex-shrink: 0;
+    }
+
+    .value {
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    .tip {
+      margin-top: 24px;
+      padding: 14px 16px;
+      background: #f2f5ff;
+      border-left: 4px solid #6b7cff;
+      font-size: 15px;
+      color: #444;
+      border-radius: 6px;
+    }
+
+    .actions {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #6b7cff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #5a6be6;
+    }
+
+    footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <h1>银行转账信息</h1>
+
+      <div class="info">
+        <div class="row">
+          <div class="label">开户名称</div>
+          <div class="value">南通市崇川区钟秀街道孕奶馨妇幼服务中心</div>
+        </div>
+
+        <div class="row">
+          <div class="label">开户银行</div>
+          <div class="value">中国工商银行股份有限公司南通人民路支行</div>
+        </div>
+
+        <div class="row">
+          <div class="label">银行账号</div>
+          <div class="value">1111821209101187043</div>
+        </div>
+      </div>
+
+      <div class="tip">
+        请在转账备注中注明用途（如：公益捐赠）。
+        <br />
+        请核对开户名称，谨防诈骗。
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="/">返回主页</a>
+      </div>
+
+      <footer>
+        如需捐赠回执或有疑问，请通过官网联系方式与我们取得联系
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
 
