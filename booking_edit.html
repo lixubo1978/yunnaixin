@@ -157,7 +157,7 @@
 
   <div class="header">
     <h1>共享房间在线预定</h1>
-    <p>系统会自动过滤不可用房间、工作中医师和不可预定时间。</p>
+    <p>系统会自动过滤不可用房间、工作中疗愈师和不可预定时间。</p>
   </div>
 
   <div class="card">
@@ -193,9 +193,9 @@
   </div>
 
   <div class="card">
-    <h2>3. 选择医师和房间</h2>
+    <h2>3. 选择疗愈师和房间</h2>
 
-    <label>选择医师</label>
+    <label>选择疗愈师</label>
     <select id="technician" onchange="updateSummary()">
       <option value="">请先选择服务项目和时间</option>
     </select>
@@ -222,7 +222,7 @@
     <h2>订单确认</h2>
 
     <div class="summary" id="summaryBox">
-      请选择服务项目、医师、房间和时间。
+      请选择服务项目、疗愈师、房间和时间。
     </div>
 
     <button onclick="submitOrder()">确认预定并生成订单</button>
@@ -250,10 +250,10 @@
   ];
 
   const technicians = [
-    { id: 1, name: "医师 A", status: "available" },
-    { id: 2, name: "医师 B", status: "busy" },
-    { id: 3, name: "医师 C", status: "available" },
-    { id: 4, name: "医师 D", status: "off" }
+    { id: 1, name: "疗愈师 A", status: "available" },
+    { id: 2, name: "疗愈师 B", status: "busy" },
+    { id: 3, name: "疗愈师 C", status: "available" },
+    { id: 4, name: "疗愈师 D", status: "off" }
   ];
 
   const rooms = [
@@ -360,7 +360,7 @@
     const serviceItemId = Number(document.getElementById("serviceItem").value);
     const technicianSelect = document.getElementById("technician");
 
-    technicianSelect.innerHTML = `<option value="">请选择医师</option>`;
+    technicianSelect.innerHTML = `<option value="">请选择疗愈师</option>`;
 
     if (!serviceItemId) {
       technicianSelect.innerHTML = `<option value="">请先选择服务项目</option>`;
@@ -498,14 +498,14 @@
     const startTime = document.getElementById("startTime").value;
 
     if (!service) {
-      document.getElementById("summaryBox").innerHTML = "请选择服务项目、医师、房间和时间。";
+      document.getElementById("summaryBox").innerHTML = "请选择服务项目、疗愈师、房间和时间。";
       return;
     }
 
     document.getElementById("summaryBox").innerHTML = `
       <p><strong>服务项目：</strong>${service.name}</p>
       <p><strong>服务时长：</strong>${service.duration} 分钟</p>
-      <p><strong>选择医师：</strong>${technician || "未选择"}</p>
+      <p><strong>选择疗愈师：</strong>${technician || "未选择"}</p>
       <p><strong>选择房间：</strong>${room || "未选择"}</p>
       <p><strong>预定时间：</strong>${bookingDate || "未选择日期"} ${startTime || ""}</p>
       <p><strong>订单金额：</strong><span class="price">¥${service.price}</span></p>
@@ -527,7 +527,7 @@
     }
 
     if (!serviceItem || !technicianId || !roomId || !bookingDate || !startTime) {
-      alert("请选择完整的服务、医师、房间和时间");
+      alert("请选择完整的服务、疗愈师、房间和时间");
       return;
     }
 
