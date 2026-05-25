@@ -1,1 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>共享房间预定界面</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    .booking-page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .booking-header {
+      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+      color: white;
+      padding: 28px;
+      border-radius: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px rgba(29, 78, 216, 0.25);
+    }
+
+    .booking-header h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    .booking-header p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .info-card strong {
+      font-size: 28px;
+      color: #1d4ed8;
+    }
+
+    .legend {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      background: white;
+      padding: 16px 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+
+    .free { background: #dcfce7; color: #166534; }
+    .booked { background: #fee2e2; color: #991b1b; }
+    .cleaning { background: #fef3c7; color: #92400e; }
+    .disabled { background: #e5e7eb; color: #4b5563; }
+
+    .booking-table-wrap {
+      overflow-x: auto;
+      background: white;
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    }
+
+    .booking-table {
+      min-width: 1300px;
+    }
+
+    .time-row,
+    .room-row {
+      display: grid;
+      grid-template-columns: 130px repeat(24, 48px);
+      gap: 6px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .corner,
+    .room-name {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: white;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .time-cell {
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 12px;
+      text-align: center;
+      border-radius: 10px;
+      padding: 10px 0;
+      font-weight: bold;
+    }
+
+    .slot {
+      height: 42px;
+      border-radius: 11px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .slot:hover {
+      transform: scale(1.08);
+      border-color: #2563eb;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+    }
+
+    .room-name {
+      color: #111827;
+      box-shadow: 4px 0 8px rgba(0,0,0,0.03);
+    }
+
+    .room-info {
+      margin-top: 28px;
+      background: white;
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    }
+
+    .room-info h2 {
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    .room-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .room-info-box {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .room-info-box h3 {
+      margin-top: 0;
+      color: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="booking-page">
+
+    <div class="booking-header">
+      <h1>共享房间预定管理</h1>
+      <p>显示10个房间，每个房间按24小时分时段展示，可用于后续接入真实预定数据。</p>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <h3>房间数量</h3>
+        <strong>10</strong>
+      </div>
+      <div class="info-card">
+        <h3>时间段</h3>
+        <strong>24</strong>
+      </div>
+      <div class="info-card">
+        <h3>今日可预定</h3>
+        <strong>186</strong>
+      </div>
+      <div class="info-card">
+        <h3>已预定</h3>
+        <strong>39</strong>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="dot free"></span>可预定</div>
+      <div class="legend-item"><span class="dot booked"></span>已预定</div>
+      <div class="legend-item"><span class="dot cleaning"></span>清洁中</div>
+      <div class="legend-item"><span class="dot disabled"></span>暂停使用</div>
+    </div>
+
+    <div class="booking-table-wrap">
+      <div class="booking-table" id="bookingTable"></div>
+    </div>
+
+    <div class="room-info">
+      <h2>共享房间信息</h2>
+
+      <div class="room-info-grid">
+        <div class="room-info-box">
+          <h3>房间类型</h3>
+          <p>棋牌室 / 会议室 / 自习室 / 临时共享空间均可适配。</p>
+        </div>
+
+        <div class="room-info-box">
+          <h3>预定规则</h3>
+          <p>当前按每小时为一个单位，后续可改成30分钟或2小时起订。</p>
+        </div>
+
+        <div class="room-info-box">
+          <h3>房间设备</h3>
+          <p>可显示门锁、空调、灯光、摄像头、扫码支付等设备状态。</p>
+        </div>
+
+        <div class="room-info-box">
+          <h3>后续功能</h3>
+          <p>点击时间格后，可弹出预定窗口、支付二维码、客户信息和开门密码。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const rooms = [
+      "房间 01", "房间 02", "房间 03", "房间 04", "房间 05",
+      "房间 06", "房间 07", "房间 08", "房间 09", "房间 10"
+    ];
+
+    const bookingTable = document.getElementById("bookingTable");
+
+    const statusList = ["free", "booked", "cleaning", "disabled"];
+
+    function getStatus(roomIndex, hour) {
+      if ((roomIndex + hour) % 17 === 0) return "disabled";
+      if ((roomIndex + hour) % 11 === 0) return "cleaning";
+      if ((roomIndex * hour) % 7 === 0 && hour !== 0) return "booked";
+      return "free";
+    }
+
+    function getStatusText(status) {
+      if (status === "free") return "空";
+      if (status === "booked") return "订";
+      if (status === "cleaning") return "洁";
+      if (status === "disabled") return "停";
+    }
+
+    function createBookingTable() {
+      let html = "";
+
+      html += `<div class="time-row">`;
+      html += `<div class="corner">房间 / 时间</div>`;
+
+      for (let h = 0; h < 24; h++) {
+        html += `<div class="time-cell">${String(h).padStart(2, "0")}:00</div>`;
+      }
+
+      html += `</div>`;
+
+      rooms.forEach((room, roomIndex) => {
+        html += `<div class="room-row">`;
+        html += `<div class="room-name">${room}</div>`;
+
+        for (let h = 0; h < 24; h++) {
+          const status = getStatus(roomIndex + 1, h);
+          html += `
+            <div 
+              class="slot ${status}" 
+              onclick="clickSlot('${room}', '${String(h).padStart(2, "0")}:00', '${status}')"
+            >
+              ${getStatusText(status)}
+            </div>
+          `;
+        }
+
+        html += `</div>`;
+      });
+
+      bookingTable.innerHTML = html;
+    }
+
+    function clickSlot(room, time, status) {
+      let statusText = {
+        free: "可预定",
+        booked: "已预定",
+        cleaning: "清洁中",
+        disabled: "暂停使用"
+      };
+
+      alert(room + " / " + time + " / 当前状态：" + statusText[status]);
+    }
+
+    createBookingTable();
+  </script>
+
+</body>
+</html>
