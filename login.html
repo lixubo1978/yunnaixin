@@ -1,1 +1,195 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>系统登录</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #1e3a8a, #38bdf8);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .login-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-title h1 {
+      margin: 0;
+      font-size: 32px;
+      color: #1e3a8a;
+    }
+
+    .login-title p {
+      margin-top: 10px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #d1d5db;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 14px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .login-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .demo-info {
+      margin-top: 25px;
+      background: #f3f4f6;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .footer-text {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-container">
+
+    <div class="login-title">
+      <h1>系统登录</h1>
+      <p>共享空间 / 疗愈服务平台</p>
+    </div>
+
+    <div class="form-group">
+      <label>账号</label>
+      <input type="text" id="username" placeholder="请输入账号" />
+    </div>
+
+    <div class="form-group">
+      <label>密码</label>
+      <input type="password" id="password" placeholder="请输入密码" />
+    </div>
+
+    <div class="form-group">
+      <label>登录身份</label>
+
+      <select id="role">
+        <option value="customer">普通客户</option>
+        <option value="therapist">疗愈师</option>
+        <option value="admin">后台管理</option>
+      </select>
+    </div>
+
+    <button class="login-btn" onclick="login()">
+      登录系统
+    </button>
+
+    <div class="demo-info">
+      <strong>当前为演示版本：</strong><br>
+
+      普通客户 → customer.html<br>
+      疗愈师 → therapist.html<br>
+      后台管理 → admin.html
+    </div>
+
+    <div class="footer-text">
+      Version 1.0
+    </div>
+
+  </div>
+
+  <script>
+
+    function login() {
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const role = document.getElementById("role").value;
+
+      if(username === "" || password === "") {
+        alert("请输入账号和密码");
+        return;
+      }
+
+      // 后续这里可以接数据库API
+      // 现在先模拟登录
+
+      if(role === "customer") {
+        window.location.href = "customer.html";
+      }
+
+      if(role === "therapist") {
+        window.location.href = "therapist.html";
+      }
+
+      if(role === "admin") {
+        window.location.href = "admin.html";
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
+```
