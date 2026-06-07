@@ -4,12 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>系统登录</title>
+  <title>登录 / 注册</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -23,7 +21,7 @@
 
     .login-container {
       width: 100%;
-      max-width: 420px;
+      max-width: 430px;
       background: white;
       border-radius: 24px;
       padding: 40px;
@@ -32,12 +30,12 @@
 
     .login-title {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
 
     .login-title h1 {
       margin: 0;
-      font-size: 32px;
+      font-size: 30px;
       color: #1e3a8a;
     }
 
@@ -47,8 +45,32 @@
       font-size: 14px;
     }
 
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #f3f4f6;
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      background: transparent;
+      color: #555;
+    }
+
+    .tab.active {
+      background: #2563eb;
+      color: white;
+    }
+
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .form-group label {
@@ -65,7 +87,6 @@
       border-radius: 14px;
       border: 1px solid #d1d5db;
       font-size: 15px;
-      transition: 0.2s;
     }
 
     .form-group input:focus,
@@ -75,7 +96,7 @@
       box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
     }
 
-    .login-btn {
+    .submit-btn {
       width: 100%;
       padding: 15px;
       border: none;
@@ -85,21 +106,15 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
+      margin-top: 6px;
     }
 
-    .login-btn:hover {
+    .submit-btn:hover {
       background: #1d4ed8;
     }
 
-    .demo-info {
-      margin-top: 25px;
-      background: #f3f4f6;
-      border-radius: 14px;
-      padding: 16px;
-      font-size: 13px;
-      color: #555;
-      line-height: 1.8;
+    .hidden {
+      display: none;
     }
 
     .footer-text {
@@ -116,13 +131,23 @@
   <div class="login-container">
 
     <div class="login-title">
-      <h1>系统登录</h1>
-      <p>共享空间 / 疗愈服务平台</p>
+      <h1 id="pageTitle">登录</h1>
+      <p>共享空间 / 理疗服务平台</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" id="loginTab" onclick="switchMode('login')">登录</button>
+      <button class="tab" id="registerTab" onclick="switchMode('register')">注册</button>
+    </div>
+
+    <div class="form-group hidden" id="nameGroup">
+      <label>姓名</label>
+      <input type="text" id="realName" placeholder="请输入姓名" />
     </div>
 
     <div class="form-group">
-      <label>账号</label>
-      <input type="text" id="username" placeholder="请输入账号" />
+      <label>账号 / 手机号</label>
+      <input type="text" id="username" placeholder="请输入账号或手机号" />
     </div>
 
     <div class="form-group">
@@ -130,27 +155,23 @@
       <input type="password" id="password" placeholder="请输入密码" />
     </div>
 
-    <div class="form-group">
-      <label>登录身份</label>
+    <div class="form-group hidden" id="confirmPasswordGroup">
+      <label>确认密码</label>
+      <input type="password" id="confirmPassword" placeholder="请再次输入密码" />
+    </div>
 
+    <div class="form-group">
+      <label>身份</label>
       <select id="role">
         <option value="customer">普通客户</option>
         <option value="therapist">理疗师</option>
-        <option value="admin">后台管理</option>
+        <option value="admin">后台管理人员</option>
       </select>
     </div>
 
-    <button class="login-btn" onclick="login()">
-      登录系统
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">
+      登录
     </button>
-
-    <div class="demo-info">
-      <strong>当前为演示版本：</strong><br>
-
-      普通客户 → customer.html<br>
-      理疗师 → therapist.html<br>
-      后台管理 → admin.html
-    </div>
 
     <div class="footer-text">
       Version 1.0
@@ -159,37 +180,101 @@
   </div>
 
   <script>
+    let currentMode = "login";
+
+    function switchMode(mode) {
+      currentMode = mode;
+
+      const pageTitle = document.getElementById("pageTitle");
+      const loginTab = document.getElementById("loginTab");
+      const registerTab = document.getElementById("registerTab");
+      const nameGroup = document.getElementById("nameGroup");
+      const confirmPasswordGroup = document.getElementById("confirmPasswordGroup");
+      const submitBtn = document.getElementById("submitBtn");
+
+      if (mode === "login") {
+        pageTitle.innerText = "登录";
+        submitBtn.innerText = "登录";
+
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+
+        nameGroup.classList.add("hidden");
+        confirmPasswordGroup.classList.add("hidden");
+      }
+
+      if (mode === "register") {
+        pageTitle.innerText = "注册";
+        submitBtn.innerText = "注册";
+
+        registerTab.classList.add("active");
+        loginTab.classList.remove("active");
+
+        nameGroup.classList.remove("hidden");
+        confirmPasswordGroup.classList.remove("hidden");
+      }
+    }
+
+    function submitForm() {
+      if (currentMode === "login") {
+        login();
+      } else {
+        register();
+      }
+    }
 
     function login() {
-
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
       const role = document.getElementById("role").value;
 
-      if(username === "" || password === "") {
+      if (username === "" || password === "") {
         alert("请输入账号和密码");
         return;
       }
 
-      // 后续这里可以接数据库API
-      // 现在先模拟登录
+      goToPage(role);
+    }
 
-      if(role === "customer") {
+    function register() {
+      const realName = document.getElementById("realName").value.trim();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value.trim();
+      const role = document.getElementById("role").value;
+
+      if (realName === "" || username === "" || password === "" || confirmPassword === "") {
+        alert("请完整填写注册信息");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("两次输入的密码不一致");
+        return;
+      }
+
+      alert("注册成功，请登录");
+
+      switchMode("login");
+
+      document.getElementById("password").value = "";
+      document.getElementById("confirmPassword").value = "";
+    }
+
+    function goToPage(role) {
+      if (role === "customer") {
         window.location.href = "customer.html";
       }
 
-      if(role === "therapist") {
+      if (role === "therapist") {
         window.location.href = "therapist.html";
       }
 
-      if(role === "admin") {
+      if (role === "admin") {
         window.location.href = "admin.html";
       }
-
     }
-
   </script>
 
 </body>
 </html>
-
